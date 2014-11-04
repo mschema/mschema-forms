@@ -45,8 +45,13 @@ module['exports'] = function (options, callback) {
       input.name = property;
       input.type = schema[property].type;
       input.format = schema[property].format;
-      input.value = validate.instance[property];
+      input.value = validate.instance[property] || "";
+      
+      if(schema[property].enum) {
+        input.enum = schema[property].enum;
+      }
 
+      
       if (input.type === "file") {
         // if any form fields are detected, set enctype to multipart
         $('.form').attr('enctype', 'multipart/form-data');
