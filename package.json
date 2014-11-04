@@ -1,0 +1,21 @@
+{
+  "name": "mschema-forms",
+  "version": "0.0.0",
+  "description": "generators bootstrap.css HTML forms from mschema",
+  "keywords": [
+    "mschema",
+    "forms",
+    "form generator",
+    "bootstrap"
+  ],
+  "main": "./index.js",
+  "dependencies": {
+    "resource": "0.5.x",
+    "view": "0.5.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
