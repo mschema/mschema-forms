@@ -11,7 +11,8 @@
   "main": "./index.js",
   "dependencies": {
     "resource": "0.5.x",
-    "view": "0.5.x"
+    "view": "0.5.x",
+    "mschema": "0.5.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

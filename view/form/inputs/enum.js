@@ -16,7 +16,7 @@ module['exports'] = function (options, callback) {
   }
 
   $('.control-label').attr('for', input.name);
-  $('.control-label').html(input.name);
+  $('.control-label').html(input.label);
   $('select').attr('id',  input.name);
   $('select').attr('name', input.name);
   $('select').attr('placeholder', input.description || '');

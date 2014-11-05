@@ -17,8 +17,12 @@ module['exports'] = function (options, callback) {
     _control = "boolean";
   }
 
-  if(control.type === "file") {
+  if (control.type === "file") {
     _control = "file";
+  }
+
+  if (control.format === "text") {
+    _control = "text";
   }
 
 
