@@ -1,6 +1,6 @@
 {
   "name": "mschema-forms",
-  "version": "0.0.0",
+  "version": "0.5.0",
   "description": "generators bootstrap.css HTML forms from mschema",
   "keywords": [
     "mschema",
