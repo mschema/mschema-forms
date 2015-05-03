@@ -43,10 +43,17 @@ module['exports'] = function (options, callback) {
       var validate = validator.validate({});
       //console.log('validate', validate.instance);
 
+      // TODO: Consider iterating through all schema properties and mapping them to input
+      // ( this will allow for abritrary tag attributes )
       var input = {};
       input.name = property;
       input.type = schema[property].type;
       input.format = schema[property].format;
+
+      if (typeof schema[property].disabled !== "undefined") {
+        input.disabled = schema[property].disabled;
+      }
+
       input.value = validate.instance[property] || "";
       input.label = schema[property].label || input.name;
       
