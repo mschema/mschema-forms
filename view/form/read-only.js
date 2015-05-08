@@ -20,7 +20,6 @@ module['exports'] = function (options, callback) {
     $('form').attr('action', options.form.action || "");
     
     $('legend').html(options.form.legend);
-    $('input[type="submit"]').attr('value', options.form.submit || 'Submit');
 
     cont = function(err, result) {
       if (result) {
@@ -49,11 +48,12 @@ module['exports'] = function (options, callback) {
       input.name = property;
       input.type = schema[property].type;
       input.format = schema[property].format;
-
+      
+      
       if (typeof schema[property].disabled !== "undefined") {
         input.disabled = schema[property].disabled;
       }
-
+      
       input.value = validate.instance[property] || "";
       input.label = schema[property].label || input.name;
       

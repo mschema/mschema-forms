@@ -15,10 +15,15 @@ module['exports'] = function (options, callback) {
 
   $('.control-label').attr('for', input.name);
   $('.control-label').html(input.label);
-//  $('input').attr('id',  input.name);
+  $('input').attr('id',  input.name);
   $('input').attr('name', input.name);
   $('input').attr('value', input.value.toString() || "");
   $('input').attr('placeholder', input.description || '');
+
+  if (input.disabled === true) {
+    $('input').attr('disabled', 'DISABLED');
+  }
+
   if(input.format === "password") {
     $('input').attr('type', "password");
   }
