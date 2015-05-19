@@ -49,6 +49,8 @@ module['exports'] = function (options, callback) {
       input.name = property;
       input.type = schema[property].type;
       input.format = schema[property].format;
+      input.description = schema[property].description || "";
+      input.placeholder = schema[property].placeholder || "";
 
       if (typeof schema[property].disabled !== "undefined") {
         input.disabled = schema[property].disabled;

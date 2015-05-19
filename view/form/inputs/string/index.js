@@ -18,7 +18,7 @@ module['exports'] = function (options, callback) {
   $('input').attr('id',  input.name);
   $('input').attr('name', input.name);
   $('input').attr('value', input.value.toString() || "");
-  $('input').attr('placeholder', input.description || '');
+  $('input').attr('placeholder', input.placeholder || '');
 
   if (input.disabled === true) {
     $('input').attr('disabled', 'DISABLED');

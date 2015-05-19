@@ -26,7 +26,8 @@ module['exports'] = function (options, callback) {
 
       // fill in row values
       for (var p in schema) {
-        output += '<th>' + p +  '</th>';
+        var header = schema[p].label || p;
+        output += '<th>' + header +  '</th>';
       }
 
       output += '<th>&nbsp;</th>';
