@@ -4,7 +4,7 @@ module['exports'] = function (options, callback) {
 
  options = options || {};
  var schema = options.schema;
- 
+
  var $ = this.$,
      self = this,
      output = '',
@@ -16,45 +16,69 @@ module['exports'] = function (options, callback) {
     $('form').attr('action', options.action || "");
     $('legend').html(options.form.legend);
 
-     if (data.length > 0) {
+    if (data.length > 0) {
 
-        $('.message').remove();
+      $('.message').remove();
 
-        data.forEach(function(record){
+      // grid headers
+      output += '<tr>';
+      output += '<th>ID</th>';
 
-          var label = record.title || record.name || record.id;
-
-          var leading;
-          if (options.id) {
-            leading = '../';
-          }
-          else {
-            leading = './';
-          }
-
-          output += ('<tr>'
-                 +     '<td><a href="' + 'get/' + record.id +'">' + label + '</a></td>'
-//                 +     '<td><a href="' + leading + 'update/'  + record.id + '">' + 'update' + '</a></td>'
-                 +     '<td><a href="?'  + 'destroy=true&id='  + record.id + '">' + 'destroy' + '</a></td>'
-                 +   '</tr>');
-        });
-        $('h1').html(entity);
-        $('.records').html(output);
-        //$('.schema').html(JSON.stringify(r.schema.properties, true, 2));
-        $('.create').html('Create new ' + entity);
-        $('.create').attr('href', '/' + entity + '/new');
-
-        if (data.length === 0) {
-          $('table').remove();
-        }
-
-      } else {
-        $('table').remove();
-        $('.message').html('no records found');
+      // fill in row values
+      for (var p in schema) {
+        output += '<th>' + p +  '</th>';
       }
 
-      output = $.html();
-      return callback(null, output);
+      output += '<th>&nbsp;</th>';
+
+      // TODO: make destroy link configurable
+
+      output += '</tr>';
+
+      data.forEach(function(record){
+
+        var label = record.title || record.name || record.id;
+
+        var leading;
+        if (options.id) {
+          leading = '../';
+        }
+        else {
+          leading = './';
+        }
+
+        // TODO: replace hard-coded rows with an mschema
+        output += '<tr>';
+        output += '<td><a href="' + 'get/' + record.id +'">' + label + '</a></td>';
+
+        // fill in row values
+        for (var p in schema) {
+          output += '<td>' + record[p] +  '</td>';
+        }
+
+        // TODO: make destroy link configurable
+        output += '<td><a href="?'  + 'destroy=true&id='  + record.id + '">' + 'destroy' + '</a></td>';
+        output += '</tr>';
+
+      });
+
+      $('h1').html(entity);
+      $('.records').html(output);
+      //$('.schema').html(JSON.stringify(r.schema.properties, true, 2));
+      $('.create').html('Create new ' + entity);
+      $('.create').attr('href', '/' + entity + '/new');
+
+      if (data.length === 0) {
+        $('table').remove();
+      }
+
+    } else {
+      $('table').remove();
+      $('.message').html('no records found');
+    }
+
+    output = $.html();
+    return callback(null, output);
 
   }
 
