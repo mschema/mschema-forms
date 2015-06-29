@@ -16,13 +16,9 @@ module['exports'] = function (options, callback) {
   $('.control-label').attr('for', input.name);
   $('.control-label').html(input.label);
   //  $('input').attr('id',  input.name);
-  $('input').attr('name', input.name);
-  $('input').attr('value', input.value.toString() || "");
-  $('input').attr('placeholder', input.description || '');
-  if(input.format === "password") {
-    $('input').attr('type', "password");
-  }
-
+  $('textarea').html(input.value);
+  $('textarea').attr('name', input.name);
+  $('textarea').attr('placeholder', input.description || '');
   if(input.format === "hidden") {
     $('input').attr('type', "hidden");
     $('.control-label').remove()
