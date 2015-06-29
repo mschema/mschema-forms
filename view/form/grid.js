@@ -54,7 +54,12 @@ module['exports'] = function (options, callback) {
 
         // fill in row values
         for (var p in schema) {
-          output += '<td>' + record[p] +  '</td>';
+          var str = record[p];
+          // TODO: move formatter code into mschema itself?
+          if (typeof schema[p].formatter === "function") {
+            str = schema[p].formatter(str);
+          }
+          output += '<td>' + str +  '</td>';
         }
 
         // TODO: make destroy link configurable
