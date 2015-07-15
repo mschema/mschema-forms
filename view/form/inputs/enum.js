@@ -23,14 +23,29 @@ module['exports'] = function (options, callback) {
   $('select option').html('Please select ' + input.name + '...');
 
   var _options = input.enum;
-  _options.forEach(function(option, i){
-    var checked = "";
-    if(option === input.value) {
-      checked = 'checked';
-    }
-    //var controls = $('.controls').clone();
-    $('.control-group').append('<div class="controls">' + option  + ': <input type="radio" ' + checked + ' name="' + input.name + '" value="' + option + '"></div>'); // Bad string concat!
-  });
+
+  if (input.format === "select") {
+    // render <select> input
+    var str = '<div class="controls"><select name="' + input.name + '">';
+    _options.forEach(function(option, i){
+      var selected = "";
+      if(option === input.value) {
+        selected = 'SELECTED="SELECTED"';
+      }
+      str += '<option value = "' + option + '" ' + selected + '>' + option + '</option>'; // Bad string concat!
+    });
+    str += '</select></div>'
+    $('.control-group').append(str);
+  } else {
+    // render radio buttons
+    _options.forEach(function (option, i){
+      var checked = "";
+      if (option === input.value) {
+        checked = 'checked';
+      }
+      $('.control-group').append('<div class="controls">' + option  + ': <input type="radio" ' + checked + ' name="' + input.name + '" value="' + option + '"></div>'); // Bad string concat!
+    });
+  }
 
   return callback(null, $.html());
 };
