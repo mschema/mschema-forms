@@ -22,10 +22,13 @@ module['exports'] = function (options, callback) {
 
       // grid headers
       output += '<tr>';
-      output += '<th>ID</th>';
+      //output += '<th>ID</th>';
 
       // fill in row values
       for (var p in schema) {
+        if (schema[p].format === "hidden") {
+          continue;
+        }
         var header = schema[p].label || p;
         output += '<th>' + header +  '</th>';
       }
@@ -50,14 +53,31 @@ module['exports'] = function (options, callback) {
 
         // TODO: replace hard-coded rows with an mschema
         output += '<tr>';
-        output += '<td><a href="' + 'get/' + record.id +'">' + label + '</a></td>';
 
         // fill in row values
         for (var p in schema) {
+          if (schema[p].format === "hidden") {
+            continue;
+          }
+
           var str = record[p];
           // TODO: move formatter code into mschema itself?
           if (typeof schema[p].formatter === "function") {
             str = schema[p].formatter(str);
+          }
+
+          if (schema[p].format === "checkbox") {
+            output += '<td>';
+              output += '<ul>';
+              str.split(',').forEach(function(r){
+                output += '<li>';
+                  output += r;
+                output += '</li>';
+              });
+              output += '</ul>';
+
+            output += '</td>';
+            continue;
           }
           output += '<td>' + str +  '</td>';
         }

@@ -36,6 +36,19 @@ module['exports'] = function (options, callback) {
     });
     str += '</select></div>'
     $('.control-group').append(str);
+  } else if (input.format === "checkbox") {
+    // render radio buttons
+    _options.forEach(function (option, i){
+      var checked = "";
+      if (option === input.value) {
+        checked = 'checked';
+      }
+      if (input.defaultState === "checked") {
+        checked = 'checked';
+      }
+      var domID = input.name + "_" + option;
+      $('.control-group').append('<div class="controls"><label for="' + domID + '">' + option  + '</label><input id="' + domID +  '"type="checkbox" ' + checked + ' name="' + input.name + '" value="' + option + '"></div>'); // Bad string concat!
+    });
   } else {
     // render radio buttons
     _options.forEach(function (option, i){
@@ -43,7 +56,7 @@ module['exports'] = function (options, callback) {
       if (option === input.value) {
         checked = 'checked';
       }
-      $('.control-group').append('<div class="controls">' + option  + ': <input type="radio" ' + checked + ' name="' + input.name + '" value="' + option + '"></div>'); // Bad string concat!
+      $('.control-group').append('<div class="controls">' + option  + ': <input type="radio" ' + checked + ' name="' + input.name + '" id="' + input.name + "' " + 'value="' + option + '"></div>'); // Bad string concat!
     });
   }
 

@@ -53,10 +53,15 @@ module['exports'] = function (options, callback) {
       if (typeof schema[property].disabled !== "undefined") {
         input.disabled = schema[property].disabled;
       }
-      
+
+      if (input.disabled !== false) {
+        input.disabled = true;
+      }
+
       input.value = validate.instance[property] || "";
       input.label = schema[property].label || input.name;
-      
+      input.size = schema[property].size || 20;
+
       if(schema[property].enum) {
         input.enum = schema[property].enum;
       }

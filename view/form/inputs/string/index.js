@@ -19,9 +19,11 @@ module['exports'] = function (options, callback) {
   $('input').attr('name', input.name);
   $('input').attr('value', input.value.toString() || "");
   $('input').attr('placeholder', input.placeholder || '');
+  $('input').attr('size', input.size || 20);
 
   if (input.disabled === true) {
     $('input').attr('disabled', 'DISABLED');
+    $('input').addClass('disabled');
   }
 
   if(input.format === "password") {

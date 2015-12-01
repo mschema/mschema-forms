@@ -14,11 +14,13 @@ module['exports'] = function (options, callback) {
   }
   var label = $('.control-label');
   label.attr('for', input.name);
-  label.html(input.name);
+  label.html(input.label || input.name);
 
   var checkbox = $('input[type=checkbox]');
 
   checkbox.attr('name', input.name);
+  checkbox.attr('id', input.name);
+  checkbox.attr('disabled', input.disabled);
 
   if(input.value.toString() === "true") {
     checkbox.attr('checked', 'CHECKED');
