@@ -18,6 +18,9 @@ module['exports'] = function (options, callback) {
     $('.back').html('back to ' + entity);
     $('.back').attr('href', '/' + entity);
     $('form').attr('action', options.form.action || "");
+    $('form').attr('name', options.form.name || "mschema-forms-generic");
+    $('form').addClass(options.form.name || "mschema-forms-generic");
+    //$('form').attr('id', options.form.id || "mschema-forms-generic");
     
     $('legend').html(options.form.legend);
     $('input[type="submit"]').attr('value', options.form.submit || 'Submit');
@@ -53,6 +56,7 @@ module['exports'] = function (options, callback) {
       input.defaultState = schema[property].defaultState || "";
       input.placeholder = schema[property].placeholder || "";
       input.size = schema[property].size || 20;
+      input.display = schema[property].display || "";
 
       if (typeof schema[property].disabled !== "undefined") {
         input.disabled = schema[property].disabled;
@@ -60,7 +64,7 @@ module['exports'] = function (options, callback) {
 
       input.value = validate.instance[property] || "";
       input.label = schema[property].label || input.name;
-      
+
       if(schema[property].enum) {
         input.enum = schema[property].enum;
       }
@@ -69,7 +73,7 @@ module['exports'] = function (options, callback) {
         // if any form fields are detected, set enctype to multipart
         $('.form').attr('enctype', 'multipart/form-data');
       }
-
+      console.log("GENER", input)
       options.control = input;
       self.parent.inputs.index.present(options, cont);
     };

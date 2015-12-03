@@ -10,9 +10,13 @@ module['exports'] = function (options, callback) {
   var $ = this.$.load(this.template),
       input = options.control;
 
-  if(input.error) {
+  if (input.error) {
     $('.control-group').addClass('error');
     $('.help-inline').html(input.error.message);
+  }
+
+  if (input.display === "none") {
+    $('.control-group').addClass('hidden');
   }
 
   $('.control-label').attr('for', input.name);
@@ -26,7 +30,7 @@ module['exports'] = function (options, callback) {
 
   if (input.format === "select") {
     // render <select> input
-    var str = '<div class="controls"><select name="' + input.name + '">';
+    var str = '<div class="controls"><select class="' + input.name + '" name="' + input.name + '">';
     _options.forEach(function(option, i){
       var selected = "";
       if(option === input.value) {

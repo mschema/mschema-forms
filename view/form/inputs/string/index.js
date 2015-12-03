@@ -13,6 +13,10 @@ module['exports'] = function (options, callback) {
     $('.help-inline').html(input.error.message);
   }
 
+  if (input.display === 'none') {
+    $('.control-group').addClass('hidden');
+  }
+
   $('.control-label').attr('for', input.name);
   $('.control-label').html(input.label);
   $('input').attr('id',  input.name);
