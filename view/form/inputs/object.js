@@ -42,7 +42,8 @@ module['exports'] = function (options, callback) {
       name: prop,
       type: "string", // TODO: multitple types, detect by value or schema
       label: input.name + "." + prop,
-      value: input.value[prop]
+      value: input.value[prop],
+      disabled: input.disabled
     };
     self.parent.index.present({ control: _control }, function (err, _input){
       $('.inputs-object').append(_input);
