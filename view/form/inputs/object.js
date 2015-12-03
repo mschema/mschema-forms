@@ -10,11 +10,15 @@ module['exports'] = function (options, callback) {
     $('.control-group').addClass('error');
     $('.help-inline').html(input.error.message);
   }
+  /*
+  Remark: Currently no labels for the field, only it's properties
   var label = $('.control-label');
   label.attr('for', input.name);
   label.html(input.label || input.name);
+  */
 
-  /* Remark: we could add a simple textarea dump for objects as an alternate option to nested inputs
+  /* 
+    Remark: we could add a simple textarea dump for objects as an alternate option to nested inputs
     if (input.format === "textarea") {
       var textarea = $('textarea');
       textarea.attr('name', input.name);
