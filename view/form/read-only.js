@@ -71,6 +71,11 @@ module['exports'] = function (options, callback) {
         $('.form').attr('enctype', 'multipart/form-data');
       }
 
+      // causing issue with `required` property being rendered in control...
+      // should probably be fixed somewhere else
+      if (input.type === "object") {
+        delete input.value.required;
+      }
       options.control = input;
       self.parent.inputs.index.present(options, cont);
     };
