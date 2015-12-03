@@ -45,7 +45,6 @@ module['exports'] = function (options, callback) {
       value: input.value[prop]
     };
     self.parent.index.present({ control: _control }, function (err, _input){
-      console.log(err, _input)
       $('.inputs-object').append(_input);
       count--;
       if (count === 0) {
