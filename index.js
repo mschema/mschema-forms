@@ -5,21 +5,7 @@ var view = require('view');
 
 forms.schema.description = "for generating HTML forms";
 
-forms.method("generate", generate, { 
-  "schema": {
-    "type": "object",
-    "required": true,
-    "default": {}
-  },
-  "type": {
-    "type": "string",
-    "required": true
-  },
-  "data": {
-    "type": "object",
-    "required": false
-  }
-});
+forms.method("generate", generate);
 
 function generate (options, callback) {
   view.create({ path: __dirname + '/view', input: "html"}, function (err, view) {
