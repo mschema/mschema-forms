@@ -41,7 +41,7 @@ module['exports'] = function (options, callback) {
     str += '</select></div>'
     $('.control-group').append(str);
   } else if (input.format === "checkbox") {
-    // render radio buttons
+    // render checkboxes
     _options.forEach(function (option, i){
       var checked = "";
       if (option === input.value) {
@@ -62,6 +62,14 @@ module['exports'] = function (options, callback) {
       }
       $('.control-group').append('<div class="controls">' + option  + ': <input type="radio" ' + checked + ' name="' + input.name + '" id="' + input.name + "' " + 'value="' + option + '"></div>'); // Bad string concat!
     });
+  }
+
+  if (input.selectAll === true) {
+    $('.control-label[for="' + input.name + '"]').after('<div class="controls"><label for="' + input.name + '-select-all">Select All:</label>' + '<input type="checkbox" ' + '' + ' name="' + 'selectAll' + '" id="' + input.name + '-select-all"' + 'value="' + 'selectAll' + '"></div>'); // Bad string concat!
+  }
+
+  if (input.selectNone === true) {
+    $('.control-label[for="' + input.name + '"]').after('<div class="controls"><label for="' + input.name + '-select-none">Select None:</label>' + '<input type="checkbox" ' + '' + ' name="' + 'selectAll' + '" id="' + input.name + '-select-none"' + 'value="' + 'selectAll' + '"></div>'); // Bad string concat!
   }
 
   return callback(null, $.html());
