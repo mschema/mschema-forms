@@ -79,11 +79,29 @@ module['exports'] = function (options, callback) {
             output += '</td>';
             continue;
           }
+          
+          /* todo: array type support
+          console.log(schema[p], str)
+          if (schema[p].type === "array") {
+            output += '<td>';
+              output += '<ul>';
+              Object.keys(str.items[0]).forEach(function(r){
+                output += '<li>';
+                  output += str.items[0][r];
+                output += '</li>';
+              });
+              output += '</ul>';
+
+            output += '</td>';
+            continue;
+          }
+          */
+          
           output += '<td>' + str +  '</td>';
         }
 
         // TODO: make destroy link configurable
-        output += '<td><a href="?'  + 'destroy=true&id='  + record.id + '">' + 'destroy' + '</a></td>';
+        output += '<td><a class="destroyLink" data-name="' + record.name + '" href="?'  + 'destroy=true&id='  + record.id + '">' + 'destroy' + '</a></td>';
         output += '</tr>';
 
       });
