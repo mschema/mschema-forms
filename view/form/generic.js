@@ -49,6 +49,7 @@ module['exports'] = function (options, callback) {
       // TODO: Consider iterating through all schema properties and mapping them to input
       // ( this will allow for abritrary tag attributes )
       var input = {};
+
       input.name = property;
       input.type = schema[property].type;
       input.format = schema[property].format;
@@ -57,6 +58,10 @@ module['exports'] = function (options, callback) {
       input.placeholder = schema[property].placeholder || "";
       input.size = schema[property].size || 20;
       input.display = schema[property].display || "";
+
+      for (p in schema[property]) {
+        input[p] = schema[property][p];
+      }
 
       if (typeof schema[property].disabled !== "undefined") {
         input.disabled = schema[property].disabled;
@@ -73,7 +78,6 @@ module['exports'] = function (options, callback) {
         // if any form fields are detected, set enctype to multipart
         $('.form').attr('enctype', 'multipart/form-data');
       }
-      console.log("GENER", input)
       options.control = input;
       self.parent.inputs.index.present(options, cont);
     };
