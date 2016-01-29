@@ -34,7 +34,9 @@ module['exports'] = function (options, callback) {
   }
 
   if (typeof control.key !== 'undefined') {
-    _control = "key";
+    // Remark: Disable `key` type for now, since its not working right
+    // Will use `string` instead
+    //_control = "key";
   }
 
   //
