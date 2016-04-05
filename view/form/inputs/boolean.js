@@ -21,8 +21,10 @@ module['exports'] = function (options, callback) {
   checkbox.attr('name', input.name);
   checkbox.attr('id', input.name);
   checkbox.attr('disabled', input.disabled);
-
-  if(input.value.toString() === "true") {
+  if (input.value === null) {
+    input.value = "";
+  }
+  if (input.value.toString() === "true") {
     checkbox.attr('checked', 'CHECKED');
   }
   else {

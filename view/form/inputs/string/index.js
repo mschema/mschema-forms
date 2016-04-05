@@ -21,6 +21,9 @@ module['exports'] = function (options, callback) {
   $('.control-label').html(input.label);
   $('input').attr('id',  input.name);
   $('input').attr('name', input.name);
+  if (input.value === null) {
+    input.value = "";
+  }
   $('input').attr('value', input.value.toString() || "");
   $('input').attr('placeholder', input.placeholder || '');
   $('input').attr('size', input.size || 20);
