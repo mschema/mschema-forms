@@ -13,6 +13,7 @@ module['exports'] = function (options, callback) {
   showForm(options.data);
 
   function showForm (data, errors) {
+
     $('form').attr('action', options.action || "");
     $('legend').html(options.form.legend);
 
@@ -22,16 +23,14 @@ module['exports'] = function (options, callback) {
 
       // grid headers
       output += '<tr>';
-      //output += '<th>ID</th>';
 
-      // fill in row values
-      for (var p in schema) {
-        if (schema[p].format === "hidden") {
-          continue;
-        }
-        var header = schema[p].label || p;
+      // keys will be used to render grid view. either passed in array of keys, or get keys from schema object
+      var keys = options.form.keys || Object.keys(schema);
+
+      keys.forEach(function(key){
+        var header = schema[key].label || p;
         output += '<th>' + header +  '</th>';
-      }
+      });
 
       output += '<th>&nbsp;</th>';
 
@@ -55,50 +54,53 @@ module['exports'] = function (options, callback) {
         output += '<tr>';
 
         // fill in row values
-        for (var p in schema) {
-          if (schema[p].format === "hidden") {
-            continue;
-          }
+        keys.forEach(function(key){
 
-          var str = record[p];
-          // TODO: move formatter code into mschema itself?
-          if (typeof schema[p].formatter === "function") {
-            str = schema[p].formatter(str);
-          }
+          var p = key;
 
-          if (schema[p].format === "checkbox") {
-            output += '<td>';
-              output += '<ul>';
-              str.split(',').forEach(function(r){
-                output += '<li>';
-                  output += r;
-                output += '</li>';
-              });
-              output += '</ul>';
+            if (schema[p].format === "hidden") {
+              return;
+            }
 
-            output += '</td>';
-            continue;
-          }
-          
-          /* todo: array type support
-          console.log(schema[p], str)
-          if (schema[p].type === "array") {
-            output += '<td>';
-              output += '<ul>';
-              Object.keys(str.items[0]).forEach(function(r){
-                output += '<li>';
-                  output += str.items[0][r];
-                output += '</li>';
-              });
-              output += '</ul>';
+            var str = record[p];
+            // TODO: move formatter code into mschema itself?
+            if (typeof schema[p].formatter === "function") {
+              str = schema[p].formatter(str);
+            }
 
-            output += '</td>';
-            continue;
-          }
-          */
-          
-          output += '<td>' + str +  '</td>';
-        }
+            if (schema[p].format === "checkbox") {
+              output += '<td>';
+                output += '<ul>';
+                str.split(',').forEach(function(r){
+                  output += '<li>';
+                    output += r;
+                  output += '</li>';
+                });
+                output += '</ul>';
+
+              output += '</td>';
+              return;
+            }
+
+            /* todo: array type support
+            console.log(schema[p], str)
+            if (schema[p].type === "array") {
+              output += '<td>';
+                output += '<ul>';
+                Object.keys(str.items[0]).forEach(function(r){
+                  output += '<li>';
+                    output += str.items[0][r];
+                  output += '</li>';
+                });
+                output += '</ul>';
+
+              output += '</td>';
+              continue;
+            }
+            */
+
+            output += '<td>' + str +  '</td>';
+        });
 
         // TODO: make destroy link configurable
         output += '<td><a class="destroyLink" data-name="' + record.name + '" href="?'  + 'destroy=true&id='  + record.id + '">' + 'destroy' + '</a></td>';
