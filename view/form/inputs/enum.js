@@ -5,7 +5,7 @@
 module['exports'] = function (options, callback) {
 
   //
-  // Todo: This load statement should be moved to Viewful
+  // Todo: This load statement should be moved to View
   //
   var $ = this.$.load(this.template),
       input = options.control;
@@ -42,6 +42,7 @@ module['exports'] = function (options, callback) {
     $('.control-group').append(str);
   } else if (input.format === "checkbox") {
     // render checkboxes
+    _options = _options.sort();
     _options.forEach(function (option, i){
       var checked = "";
       if (option === input.value) {
@@ -51,7 +52,7 @@ module['exports'] = function (options, callback) {
         checked = 'checked';
       }
       var domID = input.name + "_" + option;
-      $('.control-group').append('<div class="controls"><label for="' + domID + '">' + option  + '</label><input id="' + domID +  '"type="checkbox" ' + checked + ' name="' + input.name + '" value="' + option + '"></div>'); // Bad string concat!
+      $('.control-group').append('<div class="controls"><input id="' + domID +  '"type="checkbox" ' + checked + ' name="' + input.name + '" value="' + option + '"> <label for="' + domID + '">' + option  + '</label></div>'); // Bad string concat!
     });
   } else {
     // render radio buttons
@@ -65,11 +66,11 @@ module['exports'] = function (options, callback) {
   }
 
   if (input.selectAll === true) {
-    $('.control-label[for="' + input.name + '"]').after('<div class="controls"><label for="' + input.name + '-select-all">Select All:</label>' + '<input type="checkbox" ' + '' + ' name="' + 'selectAll' + '" id="' + input.name + '-select-all"' + 'value="' + 'selectAll' + '"></div>'); // Bad string concat!
+    $('.control-label[for="' + input.name + '"]').after('<div class="controls"><label for="' + input.name + '-select-all">Select All:</label> ' + '<input type="checkbox" ' + '' + ' name="' + 'selectAll' + '" id="' + input.name + '-select-all"' + 'value="' + 'selectAll' + '"></div>'); // Bad string concat!
   }
 
   if (input.selectNone === true) {
-    $('.control-label[for="' + input.name + '"]').after('<div class="controls"><label for="' + input.name + '-select-none">Select None:</label>' + '<input type="checkbox" ' + '' + ' name="' + 'selectAll' + '" id="' + input.name + '-select-none"' + 'value="' + 'selectAll' + '"></div>'); // Bad string concat!
+    $('.control-label[for="' + input.name + '"]').after('<div class="controls"><label for="' + input.name + '-select-none">Select None:</label> ' + '<input type="checkbox" ' + '' + ' name="' + 'selectAll' + '" id="' + input.name + '-select-none"' + 'value="' + 'selectAll' + '"></div>'); // Bad string concat!
   }
 
   return callback(null, $.html());
