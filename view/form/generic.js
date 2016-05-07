@@ -23,7 +23,7 @@ module['exports'] = function (options, callback) {
     //$('form').attr('id', options.form.id || "mschema-forms-generic");
     
     $('legend').html(options.form.legend);
-    $('input[type="submit"]').attr('value', options.form.submit || 'Submit');
+    $('button[type="submit"]').html(options.form.submit || 'Submit');
 
     cont = function(err, result) {
       if (result) {
