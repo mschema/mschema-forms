@@ -39,6 +39,7 @@ module['exports'] = function (options, callback) {
 
   if(input.format === "hidden") {
     $('input').attr('type', "hidden");
+    $('.control-group').addClass('hidden');
     $('.control-label').remove()
   }
 
