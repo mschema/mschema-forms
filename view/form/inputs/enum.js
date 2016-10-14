@@ -28,6 +28,11 @@ module['exports'] = function (options, callback) {
 
   var _options = input.enum;
 
+  // adds supported for complex enum options ( with descriptions / labels / etc )
+  if (!Array.isArray(_options)){
+    _options = Object.keys(_options);
+  }
+
   if (input.format === "select") {
     // render <select> input
     var str = '<div class="controls"><select class="' + input.name + '" name="' + input.name + '">';
@@ -52,7 +57,11 @@ module['exports'] = function (options, callback) {
         checked = 'checked';
       }
       var domID = input.name + "_" + option;
-      $('.control-group').append('<div class="controls"><input id="' + domID +  '"type="checkbox" ' + checked + ' name="' + input.name + '" value="' + option + '"> <label for="' + domID + '">' + option  + '</label></div>'); // Bad string concat!
+      var title = "";
+      if(typeof input.enum[option] === "object" && typeof input.enum[option].description !== "undefined") {
+        title = input.enum[option].description;
+      }
+      $('.control-group').append('<div class="controls"><input id="' + domID +  '"type="checkbox" ' + checked + ' name="' + input.name + '" value="' + option + '"> <label for="' + domID + '" title="' + title +'">' + option  + '</label></div>'); // Bad string concat!
     });
   } else {
     // render radio buttons

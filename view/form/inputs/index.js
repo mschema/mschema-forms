@@ -25,9 +25,15 @@ module['exports'] = function (options, callback) {
     _control = "text";
   }
 
+  if (typeof control.enum === "object") {
+    _control = "enum";
+  }
+
+  /*
   if(Array.isArray(control.enum)){
     _control = "enum";
   }
+  */
 
   if(control.type === "object") {
     _control = "object";
