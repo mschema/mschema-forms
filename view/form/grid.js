@@ -71,7 +71,10 @@ module['exports'] = function (options, callback) {
             if (schema[p].format === "checkbox") {
               output += '<td>';
                 output += '<ul>';
-                str.split(',').forEach(function(r){
+                if (typeof str === "string") {
+                  str = str.split(',');
+                }
+                str.forEach(function(r){
                   output += '<li>';
                     output += r;
                   output += '</li>';
