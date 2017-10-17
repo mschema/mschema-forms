@@ -28,7 +28,7 @@ module['exports'] = function (options, callback) {
       var keys = options.form.keys || Object.keys(schema);
 
       keys.forEach(function(key){
-        var header = schema[key].label || p;
+        var header = schema[key].label || '';
         output += '<th>' + header +  '</th>';
       });
 
