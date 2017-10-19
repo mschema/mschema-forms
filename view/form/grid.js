@@ -32,12 +32,12 @@ module['exports'] = function (options, callback) {
         output += '<th>' + header +  '</th>';
       });
 
-      output += '<th>&nbsp;</th>';
+      if (options.form.showDestroyButton === true) {
+        output += '<th>&nbsp;</th>';
+      }
 
       // TODO: make destroy link configurable
-
       output += '</tr>';
-
       data.forEach(function(record){
 
         var label = record.title || record.name || record.id;
@@ -104,9 +104,9 @@ module['exports'] = function (options, callback) {
 
             output += '<td>' + str +  '</td>';
         });
-
-        // TODO: make destroy link configurable
-        output += '<td><a class="destroyLink" data-name="' + record.name + '" href="?'  + 'destroy=true&id='  + record.id + '">' + 'destroy' + '</a></td>';
+        if (options.form.showDestroyButton === true) {
+          output += '<td><a class="destroyLink" data-name="' + record.name + '" href="?'  + 'destroy=true&id='  + record.id + '">' + 'destroy' + '</a></td>';
+        }
         output += '</tr>';
 
       });
