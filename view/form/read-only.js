@@ -48,8 +48,7 @@ module['exports'] = function (options, callback) {
       input.name = property;
       input.type = schema[property].type;
       input.format = schema[property].format;
-      
-      
+
       if (typeof schema[property].disabled !== "undefined") {
         input.disabled = schema[property].disabled;
       }
@@ -59,6 +58,11 @@ module['exports'] = function (options, callback) {
       }
 
       input.value = validate.instance[property] || "";
+
+      if (typeof _mschema[property].formatter === "function") {
+        input.value = _mschema[property].formatter(input.value);
+      }
+
       input.label = schema[property].label || input.name;
       input.size = schema[property].size || 20;
 
