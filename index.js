@@ -25,6 +25,8 @@ function generate (options, callback) {
   });
 };
 
+forms.jsonToSchema = jsonToSchema;
+
 // converts an abritrary JSON object into an mschema based on some intelligent type checking
 function jsonToSchema (data) {
   var schema = {};
