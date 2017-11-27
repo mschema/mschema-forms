@@ -70,7 +70,7 @@ module['exports'] = function (options, callback) {
       if (option === input.value) {
         checked = 'checked';
       }
-      $('.control-group').append('<div class="controls">' + option  + ': <input type="radio" ' + checked + ' name="' + input.name + '" id="' + input.name + "' " + 'value="' + option + '"></div>'); // Bad string concat!
+      $('.control-group').append('<div class="controls">' + option  + ': <input type="radio" ' + checked + ' name="' + input.name + '" id="' + input.name + '"' + 'value="' + option + '"></div>'); // Bad string concat!
     });
   }
 
