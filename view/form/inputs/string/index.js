@@ -33,6 +33,10 @@ module['exports'] = function (options, callback) {
     $('input').addClass('disabled');
   }
 
+  if (input.hint) {
+    $('.hint').html(input.hint);
+  }
+
   if(input.format === "password") {
     $('input').attr('type', "password");
   }
