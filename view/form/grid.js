@@ -17,7 +17,7 @@ module['exports'] = function (options, callback) {
     $('form').attr('action', options.action || "");
     $('legend').html(options.form.legend);
 
-    if (data.length > 0) {
+    if (data && data.length > 0) {
 
       $('.message').remove();
 
@@ -102,8 +102,9 @@ module['exports'] = function (options, callback) {
             }
             */
 
-            output += '<td>' + str +  '</td>';
+            output += '<td>' + (str || "") +  '</td>';
         });
+
         if (options.form.showDestroyButton === true) {
           output += '<td><a class="destroyLink" data-name="' + record.name + '" href="?'  + 'destroy=true&id='  + record.id + '">' + 'destroy' + '</a></td>';
         }
